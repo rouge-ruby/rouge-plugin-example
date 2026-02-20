@@ -16,6 +16,6 @@ This is an example repository for those interested in developing a plug-in to ad
 
 ## Making your own plug-in
 
-You can either use this repository as a starting point (make sure to rename files and constants as relevant), or use this as a reference while writing your own. Rouge is extensible just by subclassing `Rouge::RegexLexer`, but some of the logic in this repository can be convenient for live-previewing some sample text while developing the lexer.
+You can either use this repository as a starting point (make sure to rename files and constants as relevant), or use this as a reference while writing your own. Rouge is extensible simply by subclassing `Rouge::RegexLexer`, but some of the logic in this repository can be convenient for live-previewing some sample text while developing the lexer.
 
 Additionally, `spec/rouge_magritte_spec.rb` shows how to best to test relevant properties of a lexer - that it preserves the input, and at least the demo does not contain any error tokens. You are welcome to adapt any of this to your project, with your preferred test framework or testing approach.

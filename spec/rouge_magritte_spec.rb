@@ -15,7 +15,7 @@ class RougeMagritteTest < Minitest::Test
   end
 
   def test_lexes_demo
-    # [jneen] this should be .demo, waiting for bugfix in:
+    # [jneen] this should be RougeMagritte::Magritte.demo, waiting for bugfix in:
     # https://github.com/rouge-ruby/rouge/pull/2218
     demo_text = RougeMagritte::Magritte.instance_variable_get(:@demo)
 
