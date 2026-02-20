@@ -1,0 +1,136 @@
+miller-rabin = (
+  # Factor a number n = (2^r)*d. Here we generate [r d] pairs,
+  # incrementing r and halving d each time, detect when d becomes
+  # odd, and then take and unwrap the first entry
+  (divmod-twos ?n) =
+    iter ([?r ?d] => put [(incr %r) (div 2 %d)]) [0 %n]
+    | filter ([?r ?d] => is-odd %d)
+    | for (get)
+
+  # The Miller-Rabin primality test, using $i random numbers.
+  # Succeeds if num is probably prime, fails if num is not prime.
+  (test-prime ?i ?num) = (
+    r = (divmod-twos (decr %num))
+
+    # Check if any of the first r elements in the sequence
+    # x_(i+1) = x_i^2 % n is equal to n-1
+    (test-sequence ?x) = iter (?x => mod %num (pow 2 %x)) %x
+                       | take %r
+                       | any [%eq (dec %num)]
+
+    # Check (r^d mod num) for i random numbers r between 2 and n-2.
+    produce [rand-between 2 (sub 2 %num)]
+      | each (?rand => mod %num (pow %d %rand))
+      | take %i
+      | any (?x => eq 1 %x || test-sequence %x)
+  )
+
+  (gen-odds ?start) = produce [rand-between $start (mul 2 $start)]
+                    | each (?x => incr (mul 2 $x))
+
+  (gen-primes ?b) = gen-odds $b
+                  | each (?n => iter [%add 2] %n | take (div 2 $b))
+                  | filter [%test-prime 10]
+
+  # output the module
+  put { test-prime = $test-prime
+        gen-primes = $gen-primes }
+)
+
+(__main__) = %miller-rabin!gen-primes 7 | take 5
+
+
+
+
+# spawns a function in the background, returning its
+# input and output channels
+(spawn (?fn)) = (
+  i = (make-channel)
+  o = (make-channel)
+  & exec (for %fn) < $i > $o
+  put $i $o
+)
+
+# starts a request-reply server. usage:
+# server (?msg => put reply)
+(server (?fn)) = (
+  i o = (spawn %each ([?msg ?reply] =>
+    exec (for %fn) %msg > %reply
+  ))
+
+  # keep the channel alive on the read end
+  & sleep-forever > $i
+
+  put { request = %i }
+)
+
+# sends a message to a server, and waits for
+# a reply. output: the reply.
+(send ?server ?msg) = (
+  c = (make-channel)
+  & put [%msg $c] > %server!request
+  drain < $c
+)
+
+(__main__) = (
+  s = (server (
+    [greet ?x] => str "hello " %x
+    [die] => crash
+  ))
+
+  x = (send %s [greet world])
+  put $x # => hello world
+  send %s [greet jneen]
+  send %s [die]
+)
+
+
+[root
+  [tok BARE "a"]
+  [nested "{" "}"
+    [item
+      [nested "(" ")" [tok BARE f] [tok BIND x]]
+      [tok EQL]
+      [tok VAR x]]
+    [item
+      [tok BARE y]
+      [nested "(" ")" [tok BARE add] [tok VAR z] [tok VAR w]]]]]
+
+
+
+# dynamic $x, captures nothing
+(g) = (put $x)
+(f) = (x = 1; g)
+(f) # => 1
+
+# lexical %x, is saved from the local environment,
+# and supersedes the dynamic binding.
+g = (x = 2; (=> put %x))
+(f) = (x = 1; g)
+(f) # => 2
+
+
+
+(make-account ?balance) = {
+  balance = $balance
+  (deposit ?amt) = (%balance = (add %amt %balance))
+  (withdraw ?amt) = (%balance = (sub %amt %balance))
+}
+
+my-account = (make-account 10)
+$my-account!deposit 20
+put $my-account!balance # => 30
+$my-account!withdraw 5
+put $my-account!balance # => 25
+
+
+
+(my-function) = (
+  action %% cleanup-action
+  # in effect until the end of the function
+)
+
+
+sort %usernames | tr a-z A-z
+
+./bin/consume-data < $channel
