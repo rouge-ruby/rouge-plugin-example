@@ -18,7 +18,7 @@ if ENV['DEBUG'] == '1'
   formatter = 'null'
 else
   lexer = RougeMagritte::Magritte.new
-  formatter = 'terminal256'
+  formatter = 'terminal_truecolor'
 end
 
 Rouge.highlight(text, lexer, formatter) { |chunk| print chunk }
