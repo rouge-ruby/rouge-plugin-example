@@ -15,21 +15,14 @@ run do |env|
 
   input = File.read(ENV["SAMPLE_FILE"] || "#{__dir__}/spec/visual/samples/magritte")
 
-  body << '<html><head>'
+  body << '<!DOCTYPE html><html><head>'
 
   # <head> tag
   body << '<style type="text/css">'
   body << Rouge::Themes::ThankfulEyes.new(scope: '.container').render
   body << <<~CSS
-    body {
-      background-color: black;
-    }
-
-    .container {
-      white-space: pre;
-      font-family: monospace;
-      padding: 20px;
-    }
+    body { background-color: black; }
+    .container { white-space: pre; font-family: monospace; padding: 20px; }
   CSS
   body << '</style>'
 
