@@ -7,11 +7,7 @@ run do |env|
   require_relative 'lib/rouge/magritte'
 
   # build response
-  status = 200
-  headers = {}
   body = []
-
-  headers['Content-Type'] = 'text/html; charset=utf-8'
 
   input = File.read(ENV["SAMPLE_FILE"] || "#{__dir__}/spec/visual/samples/magritte")
 
@@ -34,5 +30,5 @@ run do |env|
   body << '</div></body></html>'
 
   # output response
-  [status, headers, body]
+  [200, {}, body]
 end
