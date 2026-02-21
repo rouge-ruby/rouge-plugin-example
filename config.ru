@@ -2,7 +2,7 @@ require 'rouge'
 
 run do |env|
   # hot reload our lexer
-  Object.send(:remove_const, :RougeMagritte) if defined?(RougeMagritte)
+  Object.send(:remove_const, :RougeMagritte) if defined?(::RougeMagritte)
   $LOADED_FEATURES.reject! { |f| f.start_with?(File.expand_path(__dir__)) }
   require_relative 'lib/rouge/magritte'
 
