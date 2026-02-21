@@ -9,7 +9,7 @@ run do |env|
   # build response
   body = []
 
-  input = File.read(ENV["SAMPLE_FILE"] || "#{__dir__}/spec/visual/samples/magritte")
+  input = File.read(ENV["SAMPLE_FILE"] || "#{__dir__}/spec/sample.mag")
 
   body << '<!DOCTYPE html><html><head>'
 

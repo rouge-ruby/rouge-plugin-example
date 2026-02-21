@@ -30,7 +30,7 @@ class RougeMagritteTest < Minitest::Test
   end
 
   def test_lexes_sample
-    sample_text = File.read("#{__dir__}/visual/samples/magritte", encoding: 'utf-8')
+    sample_text = File.read("#{__dir__}/sample.mag")
 
     fulltext = []
 
