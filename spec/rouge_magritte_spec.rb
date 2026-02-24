@@ -1,6 +1,7 @@
 require_relative 'spec_helper'
 
 class RougeMagritteTest < Minitest::Test
+  # make sure guessing infrastructure works
   def test_extension_guess
     assert_equal Rouge::Lexer.guess(filename: 'foo.mag'), RougeMagritte::Magritte
   end
@@ -14,6 +15,7 @@ class RougeMagritteTest < Minitest::Test
     assert_equal Rouge::Lexer.guess(mimetype: 'application/x-magritte'), RougeMagritte::Magritte
   end
 
+  # make sure the demo lexes with no errors and doesn't drop any characters
   def test_lexes_demo
     # [jneen] this should be RougeMagritte::Magritte.demo, waiting for bugfix in:
     # https://github.com/rouge-ruby/rouge/pull/2218
@@ -29,6 +31,8 @@ class RougeMagritteTest < Minitest::Test
     assert_equal fulltext.join, demo_text
   end
 
+  # make sure the stress-test lexes without throwing (maybe with error tokens)
+  # and doesn't drop any characters
   def test_lexes_sample
     sample_text = File.read("#{__dir__}/sample.mag")
 
