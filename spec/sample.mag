@@ -134,3 +134,7 @@ put $my-account!balance # => 25
 sort %usernames | tr a-z A-z
 
 ./bin/consume-data < $channel
+
+# comment
+# [jneen] TODO: thing
+# XXX HACK XXX

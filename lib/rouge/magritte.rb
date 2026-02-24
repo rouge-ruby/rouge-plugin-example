@@ -88,7 +88,7 @@ module RougeMagritte
       rule /TODO|XXX/, Error
       rule /\n/, Comment, :pop!
 
-      rule /[^\n]+(?=TODO|XXX)/, Comment
+      rule /[^\n]+?(?=TODO|XXX)/, Comment
       rule /[^\n]+/, Comment
     end
 
