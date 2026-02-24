@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'rouge'
-require_relative 'lib/rouge/magritte'
+require_relative 'lib/rouge-magritte'
 
 fname = ARGV[0] || "#{__dir__}/spec/sample.mag"
 
