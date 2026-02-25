@@ -1,5 +1,8 @@
 require 'rouge'
 
+# put ?debug=1 in the url bar to print debugging info
+Rouge::Lexer.enable_debug!
+
 run do |env|
   # hot reload our lexer
   Object.send(:remove_const, :RougeMagritte) if defined?(::RougeMagritte)
@@ -9,10 +12,15 @@ run do |env|
   # build response
   body = []
 
+  # load the info
   input = File.read(ENV["SAMPLE_FILE"] || "#{__dir__}/spec/sample.mag")
 
+  # use the query string for lexer options
+  lexer = Rouge::Lexer.find_fancy("magritte?#{env['QUERY_STRING']}")
+  formatter = Rouge::Formatters::HTML.new
+  highlighted_html = formatter.format(lexer.lex(input))
+
   theme_css = Rouge::Themes::ThankfulEyes.new(scope: '.container').render
-  highlighted_html = Rouge.highlight(input, 'magritte', Rouge::Formatters::HTML.new)
 
   # output response
   [200, {}, [<<~HTML]]
