@@ -2,13 +2,17 @@ require 'rouge' unless defined?(Rouge)
 
 module RougeMagritte
   class Magritte < Rouge::RegexLexer
-    # provide a unique tag
+    # provide a unique tag, lower case with underscores
     tag 'magritte'
+
+    # title for display purposes
+    title 'Magritte'
 
     # describe the language and link to a spec
     desc 'a Rouge lexer for the Magritte language (files.jneen.ca/academic/thesis.pdf)'
 
-    # allows for aliases for e.g. markdown code blocks
+    # allows for aliases for e.g. markdown code blocks.
+    # lowercase, with underscores.
     aliases 'mag'
 
     # list of filename patterns (can provide multiple)
