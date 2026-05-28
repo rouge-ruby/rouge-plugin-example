@@ -1,13 +1,13 @@
 require 'rouge'
 
-# put ?debug=1 in the url bar to print debugging info
-Rouge::Lexer.enable_debug!
-
 run do |env|
   # hot reload our lexer
   Object.send(:remove_const, :RougeMagritte) if defined?(::RougeMagritte)
   $LOADED_FEATURES.reject! { |f| f.start_with?(File.expand_path(__dir__)) }
   require_relative 'lib/rouge-magritte'
+
+  # put ?debug=1 in the url bar to print debugging info
+  Rouge::Lexer.enable_debug!
 
   # build response
   body = []
