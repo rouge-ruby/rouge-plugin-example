@@ -15,5 +15,5 @@ Gem::Specification.new do |s|
   s.licenses = ['MIT', 'BSD-2-Clause']
   s.required_ruby_version = '>= 3.0'
 
-  s.add_dependency 'rouge', '~> 4.0'
+  s.add_dependency 'rouge', '~> 5.0'
 end
