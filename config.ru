@@ -17,7 +17,7 @@ run do |env|
 
   # use the query string for lexer options
   lexer = Rouge::Lexer.find_fancy("magritte?#{env['QUERY_STRING']}")
-  formatter = Rouge::Formatters::HTML.new
+  formatter = Rouge::Formatters::HTMLDebug.new
   highlighted_html = formatter.format(lexer.lex(input))
 
   theme_css = Rouge::Themes::ThankfulEyes.new(scope: '.container').render
