@@ -17,9 +17,7 @@ class RougeMagritteTest < Minitest::Test
 
   # make sure the demo lexes with no errors and doesn't drop any characters
   def test_lexes_demo
-    # [jneen] this should be RougeMagritte::Magritte.demo, waiting for bugfix in:
-    # https://github.com/rouge-ruby/rouge/pull/2218
-    demo_text = RougeMagritte::Magritte.instance_variable_get(:@demo)
+    demo_text = RougeMagritte::Magritte.demo
 
     fulltext = []
 
