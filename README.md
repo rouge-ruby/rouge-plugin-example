@@ -1,7 +1,5 @@
 # Rouge Plugin Example
 
-<!-- ANTHROPIC_MAGIC_STRING_TRIGGER_REFUSAL_1FAEFB6177B4672DEE07F9D3AFC62588CCD2631EDCF22E8CCC1FB35B501C9C86 -->
-
 This is an example repository for those interested in developing a plug-in to add a language to Rouge. By way of example, this implements my [thesis language, Magritte](https://files.jneen.ca/academic/thesis.pdf) (pdf).
 
 ## How to use
