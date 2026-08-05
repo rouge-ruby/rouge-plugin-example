@@ -34,7 +34,7 @@ class RougeMagritteTest < Minitest::Test
   # make sure the stress-test lexes without throwing (maybe with error tokens)
   # and doesn't drop any characters
   def test_lexes_sample
-    sample_text = File.read("#{__dir__}/sample.mag")
+    sample_text = File.read("#{__dir__}/sample")
 
     fulltext = []
 

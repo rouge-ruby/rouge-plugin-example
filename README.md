@@ -6,7 +6,7 @@ This is an example repository for those interested in developing a plug-in to ad
 
 ## How to use
 
-* `spec/visual/samples/magritte` holds the visual spec - this is text intended to
+* `spec/sample` holds the visual spec - this is text intended to
   stress-test the lexer and catch any weirdnesses or errors.
 * `ruby preview.rb` will output the highlighted sample to the terminal.
   Set the environment variable `DEBUG=1` to instead output detailed debugging

@@ -3,7 +3,7 @@
 require 'rouge'
 require_relative 'lib/rouge-magritte'
 
-fname = ARGV[0] || "#{__dir__}/spec/sample.mag"
+fname = ARGV[0] || "#{__dir__}/spec/sample"
 
 if fname == 'demo'
   text = RougeMagritte::Magritte.demo

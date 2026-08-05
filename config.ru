@@ -13,7 +13,7 @@ run do |env|
   body = []
 
   # load the info
-  input = File.read(ENV["SAMPLE_FILE"] || "#{__dir__}/spec/sample.mag")
+  input = File.read(ENV["SAMPLE_FILE"] || "#{__dir__}/spec/sample")
 
   # use the query string for lexer options
   lexer = Rouge::Lexer.find_fancy("magritte?#{env['QUERY_STRING']}")
