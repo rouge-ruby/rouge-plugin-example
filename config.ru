@@ -17,8 +17,10 @@ run do |env|
 
   # use the query string for lexer options
   lexer = Rouge::Lexer.find_fancy("magritte?#{env['QUERY_STRING']}")
+  demo = lexer.class.demo
   formatter = Rouge::Formatters::HTMLDebug.new
   highlighted_html = formatter.format(lexer.lex(input))
+  highlighted_demo_html = formatter.format(lexer.lex(demo))
 
   theme_css = Rouge::Themes::ThankfulEyes.new(scope: '.container').render
 
@@ -30,16 +32,19 @@ run do |env|
       <style type="text/css">
         body {
           background-color: black;
+          margin: 0;
         }
         .container {
           white-space: pre;
           font-family: monospace;
           padding: 20px;
+          margin: 10px;
         }
         #{theme_css}
       </style>
     </head>
     <body>
+      <div class="container">#{highlighted_demo_html}</div>
       <div class="container">#{highlighted_html}</div>
     </body>
   </html>
